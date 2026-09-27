@@ -1,0 +1,2532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz de Morfologia — Ossos e Articulações</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   CORES
+========================================================= */
+
+:root{
+  --pink:#D94F83;
+  --pink-dark:#B93669;
+  --pink-light:#FCE7F0;
+  --pink-soft:#FFF4F8;
+
+  --purple:#8E5A9E;
+  --purple-light:#F3E9F6;
+
+  --green:#31845E;
+  --green-light:#E3F3EA;
+
+  --red:#C94C58;
+  --red-light:#FBE4E7;
+
+  --text:#352832;
+  --muted:#766A72;
+
+  --background:#FFF7FA;
+  --white:#FFFFFF;
+  --border:#E9D7DF;
+
+  --shadow:0 10px 30px rgba(150,60,100,.10);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  background:
+    radial-gradient(circle at top left,#FDEAF2 0,transparent 30%),
+    radial-gradient(circle at bottom right,#F4E8F8 0,transparent 30%),
+    var(--background);
+
+  color:var(--text);
+
+  font-family:'DM Sans',sans-serif;
+
+  padding:30px 15px 60px;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.wrap{
+  width:100%;
+  max-width:720px;
+  margin:auto;
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+h1,h2,h3{
+  font-family:'Playfair Display',serif;
+}
+
+h1{
+  margin:0;
+  font-size:2rem;
+  line-height:1.2;
+}
+
+.subtitle{
+  margin:12px 0 0;
+
+  color:var(--muted);
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.hero{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.logo{
+  width:72px;
+  height:72px;
+
+  margin:0 auto 15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:linear-gradient(
+    135deg,
+    var(--pink),
+    #EC82AA
+  );
+
+  color:white;
+
+  font-size:34px;
+
+  box-shadow:
+    0 10px 25px rgba(217,79,131,.25);
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+  background:rgba(255,255,255,.94);
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:25px;
+
+  box-shadow:var(--shadow);
+}
+
+
+/* =========================================================
+   ESCOLHA DE NÍVEL
+========================================================= */
+
+.level-grid{
+  display:grid;
+
+  gap:15px;
+
+  margin-top:25px;
+}
+
+.level-btn{
+  width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:19px 20px;
+
+  border-radius:15px;
+
+  border:1px solid var(--border);
+
+  background:white;
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  text-align:left;
+
+  transition:.2s ease;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.03);
+}
+
+.level-btn:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(180,60,110,.12);
+}
+
+.level-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.level-icon{
+  width:45px;
+  height:45px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  font-size:22px;
+}
+
+.level-title{
+  font-weight:700;
+  font-size:1rem;
+}
+
+.level-description{
+  color:var(--muted);
+  font-size:.83rem;
+  margin-top:3px;
+}
+
+.count{
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+
+/* CORES DOS BOTÕES */
+
+.facil .level-icon{
+  background:#FCE5EE;
+}
+
+.medio .level-icon{
+  background:#F1E6F5;
+}
+
+.pecas .level-icon{
+  background:#FFE8D9;
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:10px;
+}
+
+.level-label{
+  font-weight:700;
+  color:var(--pink-dark);
+}
+
+.question-count{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
+.progress{
+  height:8px;
+
+  background:#F1E2E8;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin-bottom:22px;
+}
+
+.progress-fill{
+  height:100%;
+
+  width:6.6%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      #EE83AA
+    );
+
+  border-radius:20px;
+
+  transition:width .3s ease;
+}
+
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.image-box{
+  background:#FFF;
+
+  border:1px solid var(--border);
+
+  border-radius:16px;
+
+  padding:13px;
+
+  margin-bottom:20px;
+
+  text-align:center;
+
+  min-height:260px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  overflow:hidden;
+}
+
+.image-box img{
+  display:block;
+
+  max-width:100%;
+
+  max-height:390px;
+
+  width:auto;
+
+  height:auto;
+
+  object-fit:contain;
+
+  border-radius:10px;
+}
+
+.image-credit{
+  color:#9A8991;
+
+  font-size:.72rem;
+
+  margin-top:10px;
+}
+
+.image-error{
+  color:#A38D96;
+
+  padding:40px 15px;
+
+  font-size:.9rem;
+}
+
+
+/* =========================================================
+   MODO PEÇAS
+========================================================= */
+
+.pecas-mode .image-box{
+  min-height:340px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #FFF,
+      #FFF7FA
+    );
+
+  border:2px solid #F1C8D8;
+}
+
+.pecas-mode .image-box img{
+  max-height:500px;
+}
+
+
+/* =========================================================
+   PERGUNTA
+========================================================= */
+
+.question-text{
+  font-size:1.18rem;
+
+  line-height:1.55;
+
+  font-weight:600;
+
+  margin-bottom:18px;
+}
+
+
+/* =========================================================
+   OPÇÕES
+========================================================= */
+
+.options{
+  display:grid;
+
+  gap:11px;
+
+  margin-bottom:18px;
+}
+
+.option{
+  width:100%;
+
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:12px;
+
+  text-align:left;
+
+  padding:14px 15px;
+
+  border-radius:12px;
+
+  border:1px solid var(--border);
+
+  background:white;
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-size:.97rem;
+
+  line-height:1.4;
+
+  transition:.18s ease;
+}
+
+.option:hover{
+  border-color:var(--pink);
+
+  background:#FFF8FB;
+
+  transform:translateX(2px);
+}
+
+.option .letter{
+  min-width:30px;
+
+  height:30px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:var(--pink-light);
+
+  color:var(--pink-dark);
+
+  font-weight:700;
+}
+
+.option.correct{
+  background:var(--green-light);
+
+  border-color:var(--green);
+}
+
+.option.correct .letter{
+  background:#CDE9D9;
+
+  color:#246847;
+}
+
+.option.wrong{
+  background:var(--red-light);
+
+  border-color:var(--red);
+}
+
+.option.wrong .letter{
+  background:#F4CDD2;
+
+  color:#9F3945;
+}
+
+.option.disabled{
+  cursor:default;
+}
+
+.option.disabled:hover{
+  transform:none;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.feedback{
+  margin-bottom:18px;
+}
+
+.feedback-box{
+  padding:16px 18px;
+
+  border-radius:13px;
+
+  line-height:1.55;
+
+  font-size:.94rem;
+}
+
+.feedback-box.correct{
+  background:var(--green-light);
+
+  border:1px solid #A9D6BB;
+}
+
+.feedback-box.wrong{
+  background:var(--red-light);
+
+  border:1px solid #E7B4BB;
+}
+
+.verdict{
+  font-family:'Playfair Display',serif;
+
+  font-size:1.1rem;
+
+  font-weight:700;
+
+  margin-bottom:5px;
+}
+
+
+/* =========================================================
+   BOTÃO PRÓXIMA
+========================================================= */
+
+.next-btn{
+  border:0;
+
+  border-radius:12px;
+
+  padding:13px 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink),
+      #E66E9A
+    );
+
+  color:white;
+
+  font-family:inherit;
+
+  font-size:.96rem;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 7px 18px rgba(217,79,131,.2);
+
+  transition:.2s;
+}
+
+.next-btn:hover{
+  transform:translateY(-1px);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink-dark),
+      var(--pink)
+    );
+}
+
+
+/* =========================================================
+   RESULTADO
+========================================================= */
+
+.result-title{
+  text-align:center;
+
+  margin-bottom:20px;
+}
+
+.score-summary{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+
+  margin:20px 0;
+}
+
+.score-box{
+  background:white;
+
+  border:1px solid var(--border);
+
+  border-radius:15px;
+
+  padding:18px 10px;
+
+  text-align:center;
+}
+
+.score-box .num{
+  font-family:'Playfair Display',serif;
+
+  font-size:2rem;
+
+  font-weight:700;
+
+  color:var(--pink-dark);
+}
+
+.score-box .lbl{
+  font-size:.78rem;
+
+  color:var(--muted);
+
+  margin-top:2px;
+}
+
+
+/* =========================================================
+   BOTÕES FINAIS
+========================================================= */
+
+.restart-row{
+  display:flex;
+
+  gap:10px;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  margin-top:20px;
+}
+
+.secondary-btn{
+  border:1px solid var(--pink);
+
+  background:white;
+
+  color:var(--pink-dark);
+
+  border-radius:12px;
+
+  padding:12px 18px;
+
+  font-family:inherit;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.secondary-btn:hover{
+  background:var(--pink-soft);
+}
+
+
+/* =========================================================
+   ESCONDIDO
+========================================================= */
+
+.hidden{
+  display:none !important;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+footer{
+  text-align:center;
+
+  margin-top:28px;
+
+  color:#A28E97;
+
+  font-size:.76rem;
+
+  line-height:1.5;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:520px){
+
+  body{
+    padding:20px 10px 45px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:17px;
+  }
+
+  h1{
+    font-size:1.65rem;
+  }
+
+  .logo{
+    width:62px;
+    height:62px;
+    font-size:29px;
+  }
+
+  .image-box{
+    min-height:210px;
+  }
+
+  .image-box img{
+    max-height:300px;
+  }
+
+  .pecas-mode .image-box{
+    min-height:270px;
+  }
+
+  .pecas-mode .image-box img{
+    max-height:370px;
+  }
+
+  .score-summary{
+    gap:7px;
+  }
+
+  .score-box{
+    padding:14px 5px;
+  }
+
+  .score-box .num{
+    font-size:1.6rem;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+
+<!-- =====================================================
+     TELA INICIAL
+===================================================== -->
+
+<section id="screen-start">
+
+  <div class="hero">
+
+    <div class="logo">
+      🦴
+    </div>
+
+    <h1>
+      Quiz de Morfologia
+    </h1>
+
+    <p class="subtitle">
+      Ossos, articulações e identificação anatômica.
+      Escolha uma modalidade para começar.
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="level-grid">
+
+
+      <!-- FÁCIL -->
+
+      <button
+        class="level-btn facil"
+        onclick="startLevel('facil')">
+
+        <div class="level-left">
+
+          <div class="level-icon">
+            🌸
+          </div>
+
+          <div>
+
+            <div class="level-title">
+              Fácil
+            </div>
+
+            <div class="level-description">
+              Conceitos básicos de anatomia
+            </div>
+
+          </div>
+
+        </div>
+
+        <span class="count">
+          15 questões
+        </span>
+
+      </button>
+
+
+      <!-- MÉDIO -->
+
+      <button
+        class="level-btn medio"
+        onclick="startLevel('medio')">
+
+        <div class="level-left">
+
+          <div class="level-icon">
+            🌷
+          </div>
+
+          <div>
+
+            <div class="level-title">
+              Médio
+            </div>
+
+            <div class="level-description">
+              Acidentes ósseos e articulações
+            </div>
+
+          </div>
+
+        </div>
+
+        <span class="count">
+          15 questões
+        </span>
+
+      </button>
+
+
+      <!-- PEÇAS ANATÔMICAS -->
+
+      <button
+        class="level-btn pecas"
+        onclick="startLevel('pecas')">
+
+        <div class="level-left">
+
+          <div class="level-icon">
+            🎀
+          </div>
+
+          <div>
+
+            <div class="level-title">
+              Peças Anatômicas
+            </div>
+
+            <div class="level-description">
+              Observe a imagem e identifique a estrutura
+            </div>
+
+          </div>
+
+        </div>
+
+        <span class="count">
+          15 questões
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TELA DO QUIZ
+===================================================== -->
+
+<section
+  id="screen-quiz"
+  class="hidden">
+
+  <div
+    class="card"
+    id="quiz-card">
+
+
+    <div class="quiz-header">
+
+      <span
+        id="level-label"
+        class="level-label">
+      </span>
+
+      <span class="question-count">
+
+        <span id="q-index">
+          1
+        </span>
+
+        de 15
+
+      </span>
+
+    </div>
+
+
+    <div class="progress">
+
+      <div
+        id="progress-fill"
+        class="progress-fill">
+      </div>
+
+    </div>
+
+
+    <!-- IMAGEM -->
+
+    <div
+      id="image-box"
+      class="image-box">
+    </div>
+
+
+    <!-- PERGUNTA -->
+
+    <div
+      id="question-text"
+      class="question-text">
+    </div>
+
+
+    <!-- ALTERNATIVAS -->
+
+    <div
+      id="options"
+      class="options">
+    </div>
+
+
+    <!-- FEEDBACK -->
+
+    <div
+      id="feedback"
+      class="feedback">
+    </div>
+
+
+    <!-- PRÓXIMA -->
+
+    <button
+      id="btn-next"
+      class="next-btn hidden"
+      onclick="nextQuestion()">
+
+      Próxima pergunta →
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESULTADO
+===================================================== -->
+
+<section
+  id="screen-end"
+  class="hidden">
+
+  <div class="card">
+
+    <div class="result-title">
+
+      <div class="logo">
+        🎉
+      </div>
+
+      <h1>
+        Resultado
+      </h1>
+
+      <p class="subtitle">
+        Veja como foi seu desempenho.
+      </p>
+
+    </div>
+
+
+    <div class="score-summary">
+
+      <div class="score-box">
+
+        <div
+          id="end-correct"
+          class="num">
+          0
+        </div>
+
+        <div class="lbl">
+          Acertos
+        </div>
+
+      </div>
+
+
+      <div class="score-box">
+
+        <div
+          id="end-wrong"
+          class="num">
+          0
+        </div>
+
+        <div class="lbl">
+          Erros
+        </div>
+
+      </div>
+
+
+      <div class="score-box">
+
+        <div
+          id="end-pct"
+          class="num">
+          0%
+        </div>
+
+        <div class="lbl">
+          Aproveitamento
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="restart-row">
+
+      <button
+        class="next-btn"
+        onclick="restart()">
+
+        Escolher outra modalidade
+
+      </button>
+
+
+      <button
+        class="secondary-btn"
+        onclick="retrySameLevel()">
+
+        Refazer esta modalidade
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+
+  Conteúdo de apoio ao estudo — não substitui o material da disciplina.
+
+</footer>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   IMAGENS
+=========================================================
+
+   ORGANIZAÇÃO DAS PASTAS:
+
+   /facil/
+   /medio/
+   /pecas/
+
+   Os nomes abaixo devem corresponder aos arquivos.
+*/
+
+
+const IMAGES = {
+
+
+  /* =====================================================
+     FÁCIL
+  ===================================================== */
+
+  facil_01:{
+    src:'facil/cranio-frontal.jpg',
+    alt:'Crânio em vista frontal',
+    credit:'Crânio — vista frontal'
+  },
+
+  facil_02:{
+    src:'facil/cranio-lateral.jpg',
+    alt:'Crânio em vista lateral',
+    credit:'Crânio — vista lateral'
+  },
+
+  facil_03:{
+    src:'facil/palato.jpg',
+    alt:'Palato duro',
+    credit:'Palato duro'
+  },
+
+  facil_04:{
+    src:'facil/escapula.jpg',
+    alt:'Escápula',
+    credit:'Escápula'
+  },
+
+  facil_05:{
+    src:'facil/osso-longo.jpg',
+    alt:'Úmero',
+    credit:'Úmero'
+  },
+
+  facil_06:{
+    src:'facil/osso-longofemur.jpg',
+    alt:'Fêmur',
+    credit:'Fêmur'
+  },
+
+  facil_07:{
+    src:'facil/carpo.jpg',
+    alt:'Ossos do carpo',
+    credit:'Ossos do carpo'
+  },
+
+  facil_08:{
+    src:'facil/mao-falanges.jpg',
+    alt:'Falanges da mão',
+    credit:'Falanges da mão'
+  },
+
+  facil_09:{
+    src:'facil/tibia-fibula.jpg',
+    alt:'Tíbia e fíbula',
+    credit:'Tíbia e fíbula'
+  },
+
+  facil_10:{
+    src:'facil/quadril.jpg',
+    alt:'Osso do quadril',
+    credit:'Osso do quadril'
+  },
+
+  facil_11:{
+    src:'facil/vertebra-toracica.jpg',
+    alt:'Vértebra torácica',
+    credit:'Vértebra torácica'
+  },
+
+  facil_12:{
+    src:'facil/atlas-axis.jpg',
+    alt:'Atlas e áxis',
+    credit:'Atlas e áxis'
+  },
+
+  facil_13:{
+    src:'facil/Tipos-de-articulacao-sinovial.png',
+    alt:'Articulação sinovial',
+    credit:'Articulação sinovial'
+  },
+
+  facil_14:{
+    src:'facil/articulacao-fibrosa.jpg',
+    alt:'Suturas do crânio',
+    credit:'Suturas do crânio'
+  },
+
+  facil_15:{
+    src:'facil/tipos-articulacao.jpg',
+    alt:'Articulação cartilaginosa',
+    credit:'Articulação cartilaginosa'
+  },
+
+
+  /* =====================================================
+     MÉDIO
+  ===================================================== */
+
+  medio_01:{
+    src:'facil/temporal.jpg',
+    alt:'Osso temporal',
+    credit:'Osso temporal'
+  },
+
+  medio_02:{
+    src:'facil/escapula-acidentes.jpg',
+    alt:'Acidentes da escápula',
+    credit:'Acidentes ósseos da escápula'
+  },
+
+  medio_03:{
+    src:'facil/umero-acidentes.jpg',
+    alt:'Acidentes do úmero',
+    credit:'Acidentes ósseos do úmero'
+  },
+
+  medio_04:{
+    src:'facil/ulna-olecrano.jpg',
+    alt:'Ulna e olécrano',
+    credit:'Ulna — olécrano'
+  },
+
+  medio_05:{
+    src:'facil/raio.jpg',
+    alt:'Rádio',
+    credit:'Rádio'
+  },
+
+  medio_06:{
+    src:'facil/carpo.jpg',
+    alt:'Ossos do carpo',
+    credit:'Ossos do carpo'
+  },
+
+  medio_07:{
+    src:'facil/acetabulo.jpg',
+    alt:'Acetábulo',
+    credit:'Acetábulo'
+  },
+
+  medio_08:{
+    src:'facil/femur-proximal.jpg',
+    alt:'Fêmur proximal',
+    credit:'Fêmur — trocânteres'
+  },
+
+  medio_09:{
+    src:'facil/maleolo-medial.jpg',
+    alt:'Maléolo medial',
+    credit:'Maléolo medial'
+  },
+
+  medio_10:{
+    src:'facil/maleolo-lateral.jpg',
+    alt:'Maléolo lateral',
+    credit:'Maléolo lateral'
+  },
+
+  medio_11:{
+    src:'facil/vertebra.jpg',
+    alt:'Vértebra',
+    credit:'Acidentes anatômicos da vértebra'
+  },
+
+  medio_12:{
+    src:'facil/atlas-axis-rotacao.jpg',
+    alt:'Atlas e áxis',
+    credit:'Atlas e áxis'
+  },
+
+  medio_13:{
+    src:'facil/sindesmose.jpg',
+    alt:'Sindesmose',
+    credit:'Sindesmose tibiofibular'
+  },
+
+  medio_14:{
+    src:'facil/sincondrose.jpg',
+    alt:'Sincondrose',
+    credit:'Sincondrose'
+  },
+
+  medio_15:{
+    src:'facil/cotovelo.jpg',
+    alt:'Articulação do cotovelo',
+    credit:'Articulação do cotovelo'
+  },
+
+
+  /* =====================================================
+     PEÇAS ANATÔMICAS
+  ===================================================== */
+
+  peca_01:{
+    src:'facil/cranio-identificacao.jpg',
+    alt:'Crânio com estruturas anatômicas',
+    credit:'Peça anatômica — crânio'
+  },
+
+  peca_02:{
+    src:'facil/occipital-forame-magno.jpg',
+    alt:'Osso occipital',
+    credit:'Peça anatômica — occipital'
+  },
+
+  peca_03:{
+    src:'facil/temporal-processos-osso.jpg',
+    alt:'Osso temporal',
+    credit:'Peça anatômica — temporal'
+  },
+
+  peca_04:{
+    src:'facil/escapula-identificacao.jpg',
+    alt:'Escápula',
+    credit:'Peça anatômica — escápula'
+  },
+
+  peca_05:{
+    src:'facil/umero-identificacao.jpg',
+    alt:'Úmero',
+    credit:'Peça anatômica — úmero'
+  },
+
+  peca_06:{
+    src:'facil/ulna-identificacao.jpg',
+    alt:'Ulna',
+    credit:'Peça anatômica — ulna'
+  },
+
+  peca_07:{
+    src:'facil/raio-identificacao.jpg',
+    alt:'Rádio',
+    credit:'Peça anatômica — rádio'
+  },
+
+  peca_08:{
+    src:'facil/carpo-identificacao.jpg',
+    alt:'Ossos do carpo',
+    credit:'Peça anatômica — carpo'
+  },
+
+  peca_09:{
+    src:'facil/femur-identificacao.jpg',
+    alt:'Fêmur',
+    credit:'Peça anatômica — fêmur'
+  },
+
+  peca_10:{
+    src:'facil/tibia-identificacao.jpg',
+    alt:'Tíbia',
+    credit:'Peça anatômica — tíbia'
+  },
+
+  peca_11:{
+    src:'facil/fibula-identificacao.jpg',
+    alt:'Fíbula',
+    credit:'Peça anatômica — fíbula'
+  },
+
+  peca_12:{
+    src:'facil/vertebra-identificacao.jpg',
+    alt:'Vértebra',
+    credit:'Peça anatômica — vértebra'
+  },
+
+  peca_13:{
+    src:'facil/atlas-axis-identificacao.jpg',
+    alt:'Atlas e áxis',
+    credit:'Peça anatômica — C1 e C2'
+  },
+
+  peca_14:{
+    src:'facil/coxal-identificacao.jpg',
+    alt:'Osso do quadril',
+    credit:'Peça anatômica — osso do quadril'
+  },
+
+  peca_15:{
+    src:'facil/articulacao-identificacao.jpg',
+    alt:'Articulação',
+    credit:'Peça anatômica — articulação'
+  }
+
+};
+
+
+/* =========================================================
+   BANCO DE QUESTÕES
+========================================================= */
+
+const BANK = {
+
+
+/* =====================================================
+   FÁCIL
+===================================================== */
+
+facil:[
+
+{
+img:'facil_01',
+q:'Qual destes ossos faz parte do crânio?',
+o:[
+'Frontal',
+'Fêmur',
+'Escafoide',
+'Tálus'
+],
+c:0,
+e:'O frontal é um dos ossos do crânio. Fêmur, escafoide e tálus pertencem aos membros.'
+},
+
+{
+img:'facil_02',
+q:'O forame magno é um acidente ósseo de qual osso?',
+o:[
+'Temporal',
+'Occipital',
+'Esfenoide',
+'Etmoide'
+],
+c:1,
+e:'O forame magno está localizado no osso occipital.'
+},
+
+{
+img:'facil_03',
+q:'A maxila e o osso palatino participam da formação de qual estrutura?',
+o:[
+'Palato duro',
+'Cavidade glenoidal',
+'Acetábulo',
+'Sulco intertubercular'
+],
+c:0,
+e:'A maxila e o palatino participam da formação do palato duro.'
+},
+
+{
+img:'facil_04',
+q:'A escápula faz parte de qual região do esqueleto?',
+o:[
+'Cintura pélvica',
+'Coluna vertebral',
+'Cintura escapular',
+'Caixa torácica'
+],
+c:2,
+e:'A escápula faz parte da cintura escapular.'
+},
+
+{
+img:'facil_05',
+q:'O úmero está localizado em qual parte do corpo?',
+o:[
+'Antebraço',
+'Braço',
+'Coxa',
+'Perna'
+],
+c:1,
+e:'O úmero é o osso do braço.'
+},
+
+{
+img:'facil_06',
+q:'O fêmur é o osso de qual região do membro inferior?',
+o:[
+'Perna',
+'Pé',
+'Coxa',
+'Quadril'
+],
+c:2,
+e:'O fêmur é o osso da coxa.'
+},
+
+{
+img:'facil_07',
+q:'Quantos ossos formam o carpo?',
+o:[
+'5',
+'8',
+'10',
+'12'
+],
+c:1,
+e:'O carpo é formado por oito ossos.'
+},
+
+{
+img:'facil_08',
+q:'As falanges são encontradas em quais estruturas?',
+o:[
+'Apenas no crânio',
+'Dedos das mãos e dos pés',
+'Apenas na coluna',
+'Apenas no quadril'
+],
+c:1,
+e:'As falanges formam os dedos das mãos e dos pés.'
+},
+
+{
+img:'facil_09',
+q:'A tíbia e a fíbula estão localizadas em qual região?',
+o:[
+'Coxa',
+'Antebraço',
+'Perna',
+'Mão'
+],
+c:2,
+e:'A tíbia e a fíbula são os dois ossos da perna.'
+},
+
+{
+img:'facil_10',
+q:'O osso do quadril é formado pela fusão de quais três ossos?',
+o:[
+'Fêmur, tíbia e fíbula',
+'Ílio, ísquio e púbis',
+'Sacro, cóccix e ílio',
+'Escafoide, trapézio e hamato'
+],
+c:1,
+e:'O osso do quadril é formado pela fusão do ílio, ísquio e púbis.'
+},
+
+{
+img:'facil_11',
+q:'Quantas vértebras torácicas existem?',
+o:[
+'7',
+'5',
+'12',
+'3 ou 4'
+],
+c:2,
+e:'Existem doze vértebras torácicas.'
+},
+
+{
+img:'facil_12',
+q:'Qual é o nome da primeira vértebra cervical (C1)?',
+o:[
+'Áxis',
+'Atlas',
+'Sacro',
+'Manúbrio'
+],
+c:1,
+e:'A primeira vértebra cervical é chamada de Atlas.'
+},
+
+{
+img:'facil_13',
+q:'As articulações sinoviais apresentam qual estrutura característica?',
+o:[
+'Fusão óssea completa',
+'Ausência de movimento',
+'Líquido sinovial',
+'Ausência de cápsula'
+],
+c:2,
+e:'As articulações sinoviais possuem líquido sinovial e cápsula articular.'
+},
+
+{
+img:'facil_14',
+q:'As suturas do crânio são exemplos de qual tipo de articulação?',
+o:[
+'Sinovial',
+'Fibrosa',
+'Cartilaginosa',
+'Óssea'
+],
+c:1,
+e:'As suturas cranianas são articulações fibrosas.'
+},
+
+{
+img:'facil_15',
+q:'A sínfise púbica é um exemplo de qual tipo de articulação?',
+o:[
+'Sinovial',
+'Fibrosa',
+'Cartilaginosa',
+'Óssea'
+],
+c:2,
+e:'A sínfise púbica é uma articulação cartilaginosa do tipo sínfise.'
+}
+
+],
+
+
+
+/* =====================================================
+   MÉDIO
+===================================================== */
+
+medio:[
+
+{
+img:'medio_01',
+q:'O processo estiloide e o processo mastoide são acidentes ósseos de qual osso?',
+o:[
+'Esfenoide',
+'Temporal',
+'Etmoide',
+'Occipital'
+],
+c:1,
+e:'O processo estiloide e o processo mastoide pertencem ao osso temporal.'
+},
+
+{
+img:'medio_02',
+q:'A cavidade glenoidal, o acrômio e o processo coracoide são acidentes de qual osso?',
+o:[
+'Clavícula',
+'Úmero',
+'Escápula',
+'Rádio'
+],
+c:2,
+e:'Todos esses acidentes ósseos pertencem à escápula.'
+},
+
+{
+img:'medio_03',
+q:'O sulco intertubercular e os tubérculos maior e menor pertencem a qual osso?',
+o:[
+'Rádio',
+'Ulna',
+'Úmero',
+'Clavícula'
+],
+c:2,
+e:'Esses acidentes pertencem ao úmero.'
+},
+
+{
+img:'medio_04',
+q:'O olécrano é acidente ósseo de qual osso?',
+o:[
+'Rádio',
+'Ulna',
+'Úmero',
+'Escafoide'
+],
+c:1,
+e:'O olécrano é um acidente ósseo da ulna.'
+},
+
+{
+img:'medio_05',
+q:'A tuberosidade do rádio e o processo estiloide pertencem a qual osso?',
+o:[
+'Ulna',
+'Úmero',
+'Rádio',
+'Clavícula'
+],
+c:2,
+e:'A tuberosidade e o processo estiloide são acidentes ósseos do rádio.'
+},
+
+{
+img:'medio_06',
+q:'Qual destes pares pertence aos ossos do carpo?',
+o:[
+'Tálus e calcâneo',
+'Escafoide e semilunar',
+'Cuboide e navicular',
+'Fêmur e patela'
+],
+c:1,
+e:'Escafoide e semilunar são ossos do carpo.'
+},
+
+{
+img:'medio_07',
+q:'A fossa do acetábulo é um acidente ósseo de qual estrutura?',
+o:[
+'Fêmur',
+'Osso do quadril',
+'Tíbia',
+'Sacro'
+],
+c:1,
+e:'A fossa do acetábulo pertence ao osso do quadril.'
+},
+
+{
+img:'medio_08',
+q:'Trocanter maior e trocanter menor são acidentes ósseos de qual osso?',
+o:[
+'Tíbia',
+'Fêmur',
+'Fíbula',
+'Osso do quadril'
+],
+c:1,
+e:'Os trocanteres maior e menor ficam na extremidade proximal do fêmur.'
+},
+
+{
+img:'medio_09',
+q:'O maléolo medial pertence a qual osso?',
+o:[
+'Fíbula',
+'Tíbia',
+'Tálus',
+'Calcâneo'
+],
+c:1,
+e:'O maléolo medial pertence à tíbia.'
+},
+
+{
+img:'medio_10',
+q:'O maléolo lateral pertence a qual osso?',
+o:[
+'Tíbia',
+'Fíbula',
+'Tálus',
+'Fêmur'
+],
+c:1,
+e:'O maléolo lateral pertence à fíbula.'
+},
+
+{
+img:'medio_11',
+q:'Quais acidentes anatômicos são comuns às vértebras?',
+o:[
+'Corpo vertebral, forame vertebral, processo transverso e processo espinhoso',
+'Cabeça, colo e tubérculo maior',
+'Acrômio e processo coracoide',
+'Fossa do acetábulo e ísquio'
+],
+c:0,
+e:'Esses são acidentes anatômicos gerais encontrados nas vértebras.'
+},
+
+{
+img:'medio_12',
+q:'A articulação entre o atlas e o áxis permite principalmente qual movimento?',
+o:[
+'Flexão através do corpo vertebral',
+'Rotação da cabeça através do processo odontoide',
+'Inclinação lateral através do forame transverso',
+'Nenhum movimento'
+],
+c:1,
+e:'O processo odontoide do áxis participa da rotação da cabeça sobre o atlas.'
+},
+
+{
+img:'medio_13',
+q:'A sindesmose tibiofibular distal é exemplo de qual tipo de articulação?',
+o:[
+'Sinovial',
+'Cartilaginosa',
+'Fibrosa',
+'Óssea'
+],
+c:2,
+e:'A sindesmose é uma articulação fibrosa.'
+},
+
+{
+img:'medio_14',
+q:'A sincondrose esfeno-occipital é exemplo de qual tipo de articulação?',
+o:[
+'Fibrosa',
+'Cartilaginosa',
+'Sinovial',
+'Óssea'
+],
+c:1,
+e:'A sincondrose é uma articulação cartilaginosa.'
+},
+
+{
+img:'medio_15',
+q:'A articulação do cotovelo é classificada morfologicamente como:',
+o:[
+'Esferóidea',
+'Plana',
+'Gínglimo',
+'Selar'
+],
+c:2,
+e:'O cotovelo é uma articulação sinovial do tipo gínglimo.'
+}
+
+],
+
+
+
+/* =====================================================
+   PEÇAS ANATÔMICAS
+=====================================================
+
+   Nesta parte as perguntas são voltadas para
+   identificação da estrutura apresentada na peça.
+*/
+
+pecas:[
+
+{
+img:'peca_01',
+q:'Observe a peça anatômica. Qual osso está sendo identificado?',
+o:[
+'Fêmur',
+'Crânio',
+'Escápula',
+'Tíbia'
+],
+c:1,
+e:'A peça apresentada corresponde ao crânio.'
+},
+
+{
+img:'peca_02',
+q:'Na peça anatômica apresentada, qual estrutura pertence ao osso occipital?',
+o:[
+'Forame magno',
+'Processo estiloide',
+'Acrômio',
+'Acetábulo'
+],
+c:0,
+e:'O forame magno é uma importante abertura do osso occipital.'
+},
+
+{
+img:'peca_03',
+q:'Observe o osso temporal. Qual estrutura é característica dessa peça?',
+o:[
+'Processo mastoide',
+'Maléolo medial',
+'Trocanter maior',
+'Cavidade glenoidal'
+],
+c:0,
+e:'O processo mastoide pertence ao osso temporal.'
+},
+
+{
+img:'peca_04',
+q:'Na escápula, qual estrutura forma a articulação com a cabeça do úmero?',
+o:[
+'Olécrano',
+'Cavidade glenoidal',
+'Forame magno',
+'Acetábulo'
+],
+c:1,
+e:'A cavidade glenoidal da escápula articula-se com a cabeça do úmero.'
+},
+
+{
+img:'peca_05',
+q:'Observe o úmero. Qual estrutura está localizada na extremidade proximal?',
+o:[
+'Cabeça do úmero',
+'Maléolo lateral',
+'Acetábulo',
+'Olécrano'
+],
+c:0,
+e:'A cabeça do úmero fica na extremidade proximal do osso.'
+},
+
+{
+img:'peca_06',
+q:'Na peça anatômica apresentada, o olécrano pertence a qual osso?',
+o:[
+'Rádio',
+'Ulna',
+'Úmero',
+'Escápula'
+],
+c:1,
+e:'O olécrano é uma estrutura da ulna.'
+},
+
+{
+img:'peca_07',
+q:'Observe o rádio. Qual estrutura pode ser identificada em sua extremidade distal?',
+o:[
+'Processo estiloide',
+'Trocanter maior',
+'Olécrano',
+'Forame magno'
+],
+c:0,
+e:'O processo estiloide é encontrado na extremidade distal do rádio.'
+},
+
+{
+img:'peca_08',
+q:'Na peça anatômica da mão, qual grupo de ossos está sendo representado?',
+o:[
+'Tarso',
+'Carpo',
+'Metatarso',
+'Costelas'
+],
+c:1,
+e:'Os ossos do carpo formam a região do punho.'
+},
+
+{
+img:'peca_09',
+q:'Observe o fêmur. Qual estrutura pertence à sua extremidade proximal?',
+o:[
+'Cabeça do fêmur',
+'Maléolo medial',
+'Olécrano',
+'Processo coracoide'
+],
+c:0,
+e:'A cabeça do fêmur está localizada na extremidade proximal.'
+},
+
+{
+img:'peca_10',
+q:'Na peça anatômica da tíbia, qual estrutura está localizada medialmente no tornozelo?',
+o:[
+'Maléolo lateral',
+'Maléolo medial',
+'Trocanter menor',
+'Processo estiloide'
+],
+c:1,
+e:'O maléolo medial pertence à tíbia.'
+},
+
+{
+img:'peca_11',
+q:'O maléolo lateral identificado na peça pertence a qual osso?',
+o:[
+'Tíbia',
+'Fíbula',
+'Fêmur',
+'Tálus'
+],
+c:1,
+e:'O maléolo lateral é uma estrutura da fíbula.'
+},
+
+{
+img:'peca_12',
+q:'Observe a vértebra. Qual estrutura é encontrada posteriormente no arco vertebral?',
+o:[
+'Processo espinhoso',
+'Cabeça do fêmur',
+'Acrômio',
+'Maléolo'
+],
+c:0,
+e:'O processo espinhoso projeta-se posteriormente a partir do arco vertebral.'
+},
+
+{
+img:'peca_13',
+q:'Na peça anatômica apresentada, qual vértebra é conhecida como Atlas?',
+o:[
+'C1',
+'C2',
+'T1',
+'L1'
+],
+c:0,
+e:'A primeira vértebra cervical, C1, é chamada de Atlas.'
+},
+
+{
+img:'peca_14',
+q:'Observe o osso do quadril. Qual estrutura forma uma grande cavidade para receber a cabeça do fêmur?',
+o:[
+'Acetábulo',
+'Forame magno',
+'Cavidade glenoidal',
+'Fossa olecraniana'
+],
+c:0,
+e:'O acetábulo é a cavidade do osso do quadril que recebe a cabeça do fêmur.'
+},
+
+{
+img:'peca_15',
+q:'Observe a peça anatômica. Qual tipo de articulação apresenta cavidade articular e líquido sinovial?',
+o:[
+'Fibrosa',
+'Cartilaginosa',
+'Sinovial',
+'Óssea'
+],
+c:2,
+e:'As articulações sinoviais apresentam cavidade articular, cápsula e líquido sinovial.'
+}
+
+]
+
+};
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let state={
+
+  level:null,
+
+  order:[],
+
+  idx:0,
+
+  correctCount:0,
+
+  wrongCount:0,
+
+  answered:false
+
+};
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+function startLevel(level){
+
+  state.level=level;
+
+  state.order=BANK[level];
+
+  state.idx=0;
+
+  state.correctCount=0;
+
+  state.wrongCount=0;
+
+  document
+    .getElementById('screen-start')
+    .classList.add('hidden');
+
+  document
+    .getElementById('screen-end')
+    .classList.add('hidden');
+
+  document
+    .getElementById('screen-quiz')
+    .classList.remove('hidden');
+
+
+  const quizCard=
+    document.getElementById('quiz-card');
+
+
+  quizCard.classList.remove(
+    'pecas-mode'
+  );
+
+
+  if(level==='pecas'){
+
+    quizCard.classList.add(
+      'pecas-mode'
+    );
+
+  }
+
+
+  const labels={
+
+    facil:'🌸 Nível fácil',
+
+    medio:'🌷 Nível médio',
+
+    pecas:'🎀 Peças anatômicas'
+
+  };
+
+
+  document
+    .getElementById('level-label')
+    .textContent=labels[level];
+
+
+  renderQuestion();
+
+}
+
+
+/* =========================================================
+   RENDERIZAR IMAGEM
+========================================================= */
+
+function renderImage(key){
+
+  const img=IMAGES[key];
+
+  const box=
+    document.getElementById('image-box');
+
+
+  if(!img){
+
+    box.innerHTML=`
+
+      <div class="image-error">
+
+        Imagem não encontrada.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML=`
+
+    <img
+      src="${img.src}"
+      alt="${img.alt}"
+      onerror="imageError(this)"
+    >
+
+    <div class="image-credit">
+
+      ${img.credit}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ERRO DE IMAGEM
+========================================================= */
+
+function imageError(element){
+
+  element.style.display='none';
+
+  const box=
+    document.getElementById('image-box');
+
+  const error=
+    document.createElement('div');
+
+  error.className=
+    'image-error';
+
+  error.textContent=
+    'Imagem não encontrada: '+
+    element.getAttribute('src');
+
+  box.appendChild(error);
+
+}
+
+
+/* =========================================================
+   RENDERIZAR QUESTÃO
+========================================================= */
+
+function renderQuestion(){
+
+  state.answered=false;
+
+
+  const q=
+    state.order[state.idx];
+
+
+  document
+    .getElementById('q-index')
+    .textContent=
+      state.idx+1;
+
+
+  document
+    .getElementById('progress-fill')
+    .style.width=
+      ((state.idx+1)/15*100)+'%';
+
+
+  renderImage(q.img);
+
+
+  document
+    .getElementById('question-text')
+    .textContent=
+      q.q;
+
+
+  document
+    .getElementById('feedback')
+    .innerHTML='';
+
+
+  document
+    .getElementById('btn-next')
+    .classList.add('hidden');
+
+
+  const letters=[
+    'A',
+    'B',
+    'C',
+    'D'
+  ];
+
+
+  const optsDiv=
+    document.getElementById('options');
+
+
+  optsDiv.innerHTML='';
+
+
+  q.o.forEach(
+    (optText,i)=>{
+
+      const btn=
+        document.createElement('button');
+
+      btn.className=
+        'option';
+
+
+      btn.innerHTML=`
+
+        <span class="letter">
+          ${letters[i]}
+        </span>
+
+        <span>
+          ${optText}
+        </span>
+
+      `;
+
+
+      btn.onclick=()=>{
+        selectAnswer(i);
+      };
+
+
+      optsDiv.appendChild(btn);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RESPONDER
+========================================================= */
+
+function selectAnswer(i){
+
+  if(state.answered)
+    return;
+
+
+  state.answered=true;
+
+
+  const q=
+    state.order[state.idx];
+
+
+  const opts=
+    document.querySelectorAll('.option');
+
+
+  opts.forEach(
+    (btn,idx)=>{
+
+      btn.classList.add(
+        'disabled'
+      );
+
+      btn.onclick=null;
+
+
+      if(idx===q.c){
+
+        btn.classList.add(
+          'correct'
+        );
+
+      }
+
+
+      if(
+        idx===i &&
+        i!==q.c
+      ){
+
+        btn.classList.add(
+          'wrong'
+        );
+
+      }
+
+    }
+  );
+
+
+  const isCorrect=
+    i===q.c;
+
+
+  if(isCorrect){
+
+    state.correctCount++;
+
+  }else{
+
+    state.wrongCount++;
+
+  }
+
+
+  const feedback=
+    document.getElementById(
+      'feedback'
+    );
+
+
+  feedback.innerHTML=`
+
+    <div class="feedback-box
+      ${isCorrect?'correct':'wrong'}">
+
+      <div class="verdict">
+
+        ${
+          isCorrect
+          ?'✓ Correto!'
+          :'✕ Incorreto'
+        }
+
+      </div>
+
+      <div>
+
+        ${q.e}
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById('btn-next')
+    .classList.remove('hidden');
+
+}
+
+
+/* =========================================================
+   PRÓXIMA
+========================================================= */
+
+function nextQuestion(){
+
+  if(
+    state.idx<
+    state.order.length-1
+  ){
+
+    state.idx++;
+
+    renderQuestion();
+
+  }else{
+
+    showEnd();
+
+  }
+
+}
+
+
+/* =========================================================
+   RESULTADO
+========================================================= */
+
+function showEnd(){
+
+  document
+    .getElementById('screen-quiz')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('screen-end')
+    .classList.remove('hidden');
+
+
+  document
+    .getElementById('end-correct')
+    .textContent=
+      state.correctCount;
+
+
+  document
+    .getElementById('end-wrong')
+    .textContent=
+      state.wrongCount;
+
+
+  const pct=
+    Math.round(
+      (
+        state.correctCount/
+        state.order.length
+      )*100
+    );
+
+
+  document
+    .getElementById('end-pct')
+    .textContent=
+      pct+'%';
+
+}
+
+
+/* =========================================================
+   ESCOLHER OUTRA MODALIDADE
+========================================================= */
+
+function restart(){
+
+  document
+    .getElementById('screen-quiz')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('screen-end')
+    .classList.add('hidden');
+
+
+  document
+    .getElementById('screen-start')
+    .classList.remove('hidden');
+
+}
+
+
+/* =========================================================
+   REFAZER MESMO NÍVEL
+========================================================= */
+
+function retrySameLevel(){
+
+  startLevel(
+    state.level
+  );
+
+}
+
+</script>
+
+</body>
+</html>
